@@ -32,6 +32,8 @@
       </header>
       <section class="view active" id="view-home">
         <div class="welcome-card"><div><p class="eyebrow mint">A FRESH START</p><h2>MAKE EVERY<br>DAY COUNT.</h2><p class="muted">අද කරන්න ඕන දේවල් ටිකෙන් ටික සම්පූර්ණ කරමු.</p></div><div class="welcome-orb">✦</div></div>
+        <div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR LEVEL</p><h2>ඔයාගේ අධ්‍යාපන මට්ටම</h2><p class="muted">ඉගෙනීම ආරම්භ කිරීමට කොටසක් තෝරන්න.</p></div></div>
+        <div class="level-grid"><button class="level-card" id="openAL"><span class="level-symbol">🎓</span><b>A/L Technology</b><small>SFT · ET · ICT</small><span class="level-link">Continue →</span></button><button class="level-card" id="openOL"><span class="level-symbol">📚</span><b>O/L</b><small>2027 O/L Batch ඇතුළුව</small><span class="level-link">Explore →</span></button></div>
         <div class="stats-grid">
           <article class="stat-card"><span class="stat-icon">✓</span><p>Tasks done</p><strong id="doneCount">0</strong></article>
           <article class="stat-card"><span class="stat-icon">◷</span><p>Tasks left</p><strong id="leftCount">0</strong></article>
@@ -42,6 +44,22 @@
         <div class="quick-grid">
           <button class="quick-card" data-go="focus"><span>◷</span><b>Focus Timer</b><small>Make time count</small></button>
         </div>
+      </section>
+      <section class="view" id="view-ol-batch">
+        <div class="section-heading"><div><p class="eyebrow">ORDINARY LEVEL</p><h2>O/L Batches</h2><p class="muted">ඔයාගේ විභාග කණ්ඩායම තෝරන්න.</p></div><button class="secondary-btn" data-go="home">← Overview</button></div>
+        <button class="batch-card" id="open2027OL"><span class="batch-year">2027</span><span><b>2027 O/L Batch</b><small>විෂයන් සහ පාඩම් වෙත යන්න</small></span><span class="batch-arrow">→</span></button>
+      </section>
+      <section class="view" id="view-ol-subjects">
+        <div class="section-heading"><div><p class="eyebrow">2027 O/L BATCH</p><h2>ප්‍රධාන විෂයන්</h2><p class="muted">දැනට ඇතුළත් කර ඇති විෂයන් 6.</p></div><button class="secondary-btn" data-go="ol-batch">← Batches</button></div>
+        <div class="ol-subject-grid">
+          <article class="ol-subject-card"><span>01</span><b>ගණිතය</b></article>
+          <article class="ol-subject-card"><span>02</span><b>විද්‍යාව</b></article>
+          <article class="ol-subject-card"><span>03</span><b>සිංහල</b></article>
+          <article class="ol-subject-card"><span>04</span><b>ඉංග්‍රීසි</b></article>
+          <article class="ol-subject-card"><span>05</span><b>ඉතිහාසය</b></article>
+          <article class="ol-subject-card"><span>06</span><b>ICT</b></article>
+        </div>
+        <p class="muted ol-note">මෙම විෂයන් සඳහා Notes සහ MCQ පුහුණුව ඉදිරි Updates වලදී එකතු කරමු.</p>
       </section>
       <section class="view" id="view-tasks">
         <div class="section-heading"><div><p class="eyebrow">GET IT DONE</p><h2>Tasks</h2><p class="muted">වැඩ එකින් එක සම්පූර්ණ කරන්න.</p></div></div>
@@ -72,6 +90,6 @@
   </div>
   <script src="mcq-data.js?v=3.7"></script>
   <script src="et-mcq-data.js?v=3.7"></script>
-  <script src="app.js?v=3.7"></script>
+  <script src="app.js?v=3.8"></script>
 </body>
 </html>
