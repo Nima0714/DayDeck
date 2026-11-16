@@ -9,11 +9,14 @@ let tasks = store.get("tasks", []);
 function showView(name) {
   $$(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + name));
   $$(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.view === name));
-  const titles = {home:"Good day",tasks:"Your tasks",monthly:"Monthly Tracker",tomorrow:"Tomorrow Planner",quiz:"MCQ Quiz",focus:"Focus Timer"};
+  const titles = {home:"Good day","ol-batch":"O/L Batches","ol-subjects":"2027 O/L Batch",tasks:"Your tasks",monthly:"Monthly Tracker",tomorrow:"Tomorrow Planner",quiz:"MCQ Quiz",focus:"Focus Timer"};
   $("#pageTitle").innerHTML = `${titles[name] || "DayDeck"} <span>✦</span>`;
   window.scrollTo({top:0,behavior:"smooth"});
 }
-$$(".nav-btn").forEach(b => b.addEventListener("click", () => showView(b.dataset.view)));
+$(".nav-btn").forEach(b => b.addEventListener("click", () => showView(b.dataset.view)));
+$("#openAL").addEventListener("click", () => showView("quiz"));
+$("#openOL").addEventListener("click", () => showView("ol-batch"));
+$("#open2027OL").addEventListener("click", () => showView("ol-subjects"));
 $$("[data-go]").forEach(b => b.addEventListener("click", () => showView(b.dataset.go)));
 
 function renderTasks() {
