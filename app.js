@@ -5,12 +5,11 @@ const store = {
   set(key, value) { localStorage.setItem("daydeck_" + key, JSON.stringify(value)); }
 };
 let tasks = store.get("tasks", []);
-let notes = store.get("notes", []);
 
 function showView(name) {
   $$(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + name));
   $$(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.view === name));
-  const titles = {home:"Good day",tasks:"Your tasks",monthly:"Monthly Tracker",tomorrow:"Tomorrow Planner",quiz:"MCQ Quiz",focus:"Focus Timer",notes:"Quick Notes"};
+  const titles = {home:"Good day",tasks:"Your tasks",monthly:"Monthly Tracker",tomorrow:"Tomorrow Planner",quiz:"MCQ Quiz",focus:"Focus Timer"};
   $("#pageTitle").innerHTML = `${titles[name] || "DayDeck"} <span>✦</span>`;
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -45,13 +44,6 @@ function renderTasks() {
 function saveTasks(){store.set("tasks",tasks);renderTasks();}
 $("#taskForm").addEventListener("submit",e=>{e.preventDefault();const text=$("#taskInput").value.trim();if(!text)return;tasks.unshift({id:Date.now(),text,done:false});$("#taskInput").value="";saveTasks();});
 
-function renderNotes(){
-  $("#noteList").innerHTML=notes.length?notes.map(n=>`<article class="note-card"><h3 class="note-title"></h3><p class="note-body"></p><div class="note-foot"><small>${new Date(n.id).toLocaleDateString()}</small><button data-delete-note="${n.id}">Delete</button></div></article>`).join(""):'<div class="empty-state wide">තවම notes නැහැ.</div>';
-  $("#noteList").querySelectorAll(".note-card").forEach((el,i)=>{el.querySelector(".note-title").textContent=notes[i].title;el.querySelector(".note-body").textContent=notes[i].body;});
-  $$("[data-delete-note]").forEach(b=>b.addEventListener("click",()=>{notes=notes.filter(n=>String(n.id)!==b.dataset.deleteNote);store.set("notes",notes);renderNotes();}));
-}
-$("#noteForm").addEventListener("submit",e=>{e.preventDefault();const title=$("#noteTitle").value.trim(),body=$("#noteBody").value.trim();if(!title||!body)return;notes.unshift({id:Date.now(),title,body});store.set("notes",notes);$("#noteTitle").value="";$("#noteBody").value="";renderNotes();});
-
 let duration=25*60,remaining=duration,interval=null;
 function updateTimer(){$("#timerDisplay").textContent=`${String(Math.floor(remaining/60)).padStart(2,"0")}:${String(remaining%60).padStart(2,"0")}`;}
 function stopTimer(){if(interval){clearInterval(interval);interval=null;}}
@@ -60,7 +52,7 @@ $("#timerStart").addEventListener("click",()=>{if(interval){stopTimer();$("#time
 $("#timerReset").addEventListener("click",()=>{stopTimer();remaining=duration;$("#timerStart").textContent="Start";$("#timerMessage").textContent="Timer reset.";updateTimer();});
 
 const now=new Date();$("#todayLabel").textContent=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"}).toUpperCase();
-renderTasks();renderNotes();updateTimer();
+renderTasks();updateTimer();
 
 let installPrompt=null;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("#installBtn").hidden=false;});
