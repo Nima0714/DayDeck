@@ -1,5 +1,5 @@
-const CACHE="daydeck-v3.7";
-const FILES=["./","./index.html","./style.css","./app.js?v=3.7","./mcq-data.js?v=3.7","./et-mcq-data.js?v=3.7","./manifest.json","./icon.svg"];
+const CACHE="daydeck-v3.8";
+const FILES=["./","./index.html","./style.css","./app.js?v=3.8","./mcq-data.js?v=3.7","./et-mcq-data.js?v=3.7","./manifest.json","./icon.svg"];
 self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))));
 self.addEventListener("fetch",event=>{
