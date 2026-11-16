@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="si">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="DayDeck — your day, your direction.">
+  <title>DayDeck</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="DayDeck home">
+        <span class="brand-mark">✦</span><span>DayDeck</span>
+      </a>
+      <p class="side-caption">YOUR PERSONAL SPACE</p>
+      <nav class="nav" aria-label="Main navigation">
+        <button class="nav-btn active" data-view="home"><span>⌂</span> Overview</button>
+        <button class="nav-btn" data-view="tasks"><span>✓</span> Tasks</button>
+        <button class="nav-btn" data-view="study"><span>▤</span> Study Planner</button>
+        <button class="nav-btn" data-view="focus"><span>◷</span> Focus Timer</button>
+        <button class="nav-btn" data-view="notes"><span>✎</span> Notes</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="offline-pill"><i></i> Works offline</div>
+        <p>Small steps. Every day.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="todayLabel">YOUR SPACE</p>
+          <h1 id="pageTitle">Good day <span>✦</span></h1>
+        </div>
+        <button class="avatar" id="installBtn" title="Install DayDeck" hidden>↓</button>
+      </header>
+
+      <section class="view active" id="view-home">
+        <div class="welcome-card">
+          <div>
+            <p class="eyebrow mint">A FRESH START</p>
+            <h2>ඔයාගේ දවස,<br>ඔයාගේ දිශාව.</h2>
+            <p class="muted">අද කරන්න ඕන දේවල් ටිකෙන් ටික සම්පූර්ණ කරමු.</p>
+          </div>
+          <div class="welcome-orb">✦</div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon">✓</span><p>Tasks done</p><strong id="doneCount">0</strong></article>
+          <article class="stat-card"><span class="stat-icon">◷</span><p>Tasks left</p><strong id="leftCount">0</strong></article>
+          <article class="stat-card"><span class="stat-icon">▤</span><p>Study subjects</p><strong id="subjectCount">0</strong></article>
+        </div>
+        <div class="section-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Today's tasks</h2></div><button class="text-btn" data-go="tasks">View all →</button></div>
+        <div class="panel" id="homeTasks"><div class="empty-state">තවම tasks නැහැ. Tasks එකක් එකතු කරමු.</div></div>
+        <div class="section-heading"><div><p class="eyebrow">QUICK ACCESS</p><h2>Jump back in</h2></div></div>
+        <div class="quick-grid">
+          <button class="quick-card" data-go="study"><span>▤</span><b>Study Planner</b><small>Plan your learning</small></button>
+          <button class="quick-card" data-go="focus"><span>◷</span><b>Focus Timer</b><small>Make time count</small></button>
+          <button class="quick-card" data-go="notes"><span>✎</span><b>Quick Notes</b><small>Save your thoughts</small></button>
+        </div>
+      </section>
+
+      <section class="view" id="view-tasks">
+        <div class="section-heading"><div><p class="eyebrow">GET IT DONE</p><h2>Tasks</h2><p class="muted">වැඩ එකින් එක සම්පූර්ණ කරන්න.</p></div></div>
+        <form class="add-form" id="taskForm"><input id="taskInput" maxlength="100" placeholder="අද කරන්න ඕන දෙයක්..." required><button class="primary-btn">Add task</button></form>
+        <div class="panel"><div class="panel-head"><b>Your list</b><span id="taskSummary" class="muted small">0 tasks</span></div><div id="taskList" class="item-list"><div class="empty-state">ඔයාගේ පළමු task එක එකතු කරන්න.</div></div></div>
+      </section>
+
+      <section class="view" id="view-study">
+        <div class="section-heading"><div><p class="eyebrow">LEARN WITH A PLAN</p><h2>Study Planner</h2><p class="muted">ඔයා ඉගෙනගන්න විෂයන් මෙතැනට එකතු කරන්න.</p></div></div>
+        <form class="add-form" id="subjectForm"><input id="subjectInput" maxlength="50" placeholder="විෂය නම (උදා: ICT)" required><button class="primary-btn">Add subject</button></form>
+        <div id="subjectList" class="subject-grid"><div class="empty-state wide">තවම විෂයන් එකතු කරලා නැහැ.</div></div>
+      </section>
+
+      <section class="view" id="view-focus">
+        <div class="section-heading"><div><p class="eyebrow">ONE THING AT A TIME</p><h2>Focus Timer</h2><p class="muted">කෙටි විවේකත් එක්ක අවධානයෙන් වැඩ කරන්න.</p></div></div>
+        <div class="timer-card">
+          <p class="eyebrow mint" id="timerMode">FOCUS SESSION</p>
+          <div class="timer-ring"><div><strong id="timerDisplay">25:00</strong><span id="timerCaption">Minutes of focus</span></div></div>
+          <div class="timer-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="15">15 min</button><button class="preset" data-minutes="5">5 min break</button></div>
+          <div class="timer-actions"><button class="primary-btn" id="timerStart">Start</button><button class="secondary-btn" id="timerReset">Reset</button></div>
+          <p class="muted small" id="timerMessage">Ready when you are.</p>
+        </div>
+      </section>
+
+      <section class="view" id="view-notes">
+        <div class="section-heading"><div><p class="eyebrow">SAVE YOUR THOUGHTS</p><h2>Quick Notes</h2><p class="muted">වැදගත් දේවල් අමතක නොවෙන්න ලියාගන්න.</p></div></div>
+        <form class="note-form" id="noteForm"><input id="noteTitle" maxlength="70" placeholder="Note title" required><textarea id="noteBody" rows="5" maxlength="2000" placeholder="මෙතැන සටහන ලියන්න..." required></textarea><button class="primary-btn">Save note</button></form>
+        <div id="noteList" class="notes-grid"><div class="empty-state wide">තවම notes නැහැ.</div></div>
+      </section>
+      <footer>DayDeck <span>✦</span> Made for your everyday progress.</footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
