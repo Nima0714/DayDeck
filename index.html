@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101827">
-  <meta name="description" content="DayDeck — your day, your direction.">
+  <meta name="description" content="DayDeck — Make every day count.">
   <title>DayDeck</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -18,7 +18,6 @@
       <nav class="nav" aria-label="Main navigation">
         <button class="nav-btn active" data-view="home"><span>⌂</span> Overview</button>
         <button class="nav-btn" data-view="tasks"><span>✓</span> Tasks</button>
-        <button class="nav-btn" data-view="study"><span>▤</span> Study Planner</button>
         <button class="nav-btn" data-view="monthly"><span>▦</span> Monthly Tracker</button>
         <button class="nav-btn" data-view="tomorrow"><span>☀</span> Tomorrow</button>
         <button class="nav-btn" data-view="quiz"><span>?</span> MCQ Quiz</button>
@@ -33,17 +32,15 @@
         <button class="avatar" id="installBtn" title="Install DayDeck" hidden>↓</button>
       </header>
       <section class="view active" id="view-home">
-        <div class="welcome-card"><div><p class="eyebrow mint">A FRESH START</p><h2>ඔයාගේ දවස,<br>ඔයාගේ දිශාව.</h2><p class="muted">අද කරන්න ඕන දේවල් ටිකෙන් ටික සම්පූර්ණ කරමු.</p></div><div class="welcome-orb">✦</div></div>
+        <div class="welcome-card"><div><p class="eyebrow mint">A FRESH START</p><h2>MAKE EVERY<br>DAY COUNT.</h2><p class="muted">අද කරන්න ඕන දේවල් ටිකෙන් ටික සම්පූර්ණ කරමු.</p></div><div class="welcome-orb">✦</div></div>
         <div class="stats-grid">
           <article class="stat-card"><span class="stat-icon">✓</span><p>Tasks done</p><strong id="doneCount">0</strong></article>
           <article class="stat-card"><span class="stat-icon">◷</span><p>Tasks left</p><strong id="leftCount">0</strong></article>
-          <article class="stat-card"><span class="stat-icon">▤</span><p>Study subjects</p><strong id="subjectCount">0</strong></article>
         </div>
         <div class="section-heading"><div><p class="eyebrow">STAY ON TRACK</p><h2>Today's tasks</h2></div><button class="text-btn" data-go="tasks">View all →</button></div>
         <div class="panel" id="homeTasks"><div class="empty-state">තවම tasks නැහැ. Tasks එකක් එකතු කරමු.</div></div>
         <div class="section-heading"><div><p class="eyebrow">QUICK ACCESS</p><h2>Jump back in</h2></div></div>
         <div class="quick-grid">
-          <button class="quick-card" data-go="study"><span>▤</span><b>Study Planner</b><small>Plan your learning</small></button>
           <button class="quick-card" data-go="focus"><span>◷</span><b>Focus Timer</b><small>Make time count</small></button>
           <button class="quick-card" data-go="notes"><span>✎</span><b>Quick Notes</b><small>Save your thoughts</small></button>
         </div>
@@ -52,11 +49,6 @@
         <div class="section-heading"><div><p class="eyebrow">GET IT DONE</p><h2>Tasks</h2><p class="muted">වැඩ එකින් එක සම්පූර්ණ කරන්න.</p></div></div>
         <form class="add-form" id="taskForm"><input id="taskInput" maxlength="100" placeholder="අද කරන්න ඕන දෙයක්..." required><button class="primary-btn">Add task</button></form>
         <div class="panel"><div class="panel-head"><b>Your list</b><span id="taskSummary" class="muted small">0 tasks</span></div><div id="taskList" class="item-list"><div class="empty-state">ඔයාගේ පළමු task එක එකතු කරන්න.</div></div></div>
-      </section>
-      <section class="view" id="view-study">
-        <div class="section-heading"><div><p class="eyebrow">LEARN WITH A PLAN</p><h2>Study Planner</h2><p class="muted">ඔයා ඉගෙනගන්න විෂයන් මෙතැනට එකතු කරන්න.</p></div></div>
-        <form class="add-form" id="subjectForm"><input id="subjectInput" maxlength="50" placeholder="විෂය නම (උදා: ICT)" required><button class="primary-btn">Add subject</button></form>
-        <div id="subjectList" class="subject-grid"><div class="empty-state wide">තවම විෂයන් එකතු කරලා නැහැ.</div></div>
       </section>
       <section class="view" id="view-monthly">
         <div class="section-heading"><div><p class="eyebrow">YOUR CONSISTENCY</p><h2>Monthly Tracker</h2><p class="muted">දවසින් දවස ඔයාගේ progress එක බලන්න.</p></div></div>
@@ -71,7 +63,7 @@
       </section>
       <section class="view" id="view-quiz">
         <div class="section-heading"><div><p class="eyebrow">PRACTICE & IMPROVE</p><h2>MCQ Quiz</h2><p class="muted">A/L Technology විෂයන් සඳහා පුහුණු වෙන්න.</p></div></div>
-        <div class="panel quiz-panel"><label for="quizSubject">විෂය තෝරන්න</label><select id="quizSubject"><option value="SFT">SFT</option><option value="ET">ET</option><option value="ICT">ICT</option></select><div id="quizArea"><p class="muted">SFT පුහුණු ප්‍රශ්න තෝරලා පටන් ගන්න.</p><button class="primary-btn" id="startQuiz">Start SFT Quiz</button></div></div>
+        <div class="panel quiz-panel"><label for="quizSubject">විෂය තෝරන්න</label><select id="quizSubject"><option value="SFT">SFT</option><option value="ET">ET</option><option value="ICT">ICT</option></select><div id="quizArea"><p class="muted">විෂය තෝරාගෙන ප්‍රශ්න 10ක ප්‍රශ්නාවලිය ආරම්භ කරන්න.</p><button class="primary-btn" id="startQuiz">Start Quiz</button></div></div>
       </section>
       <section class="view" id="view-focus">
         <div class="section-heading"><div><p class="eyebrow">ONE THING AT A TIME</p><h2>Focus Timer</h2><p class="muted">කෙටි විවේකත් එක්ක අවධානයෙන් වැඩ කරන්න.</p></div></div>
@@ -85,6 +77,7 @@
       <footer>DayDeck <span>✦</span> Made for your everyday progress.</footer>
     </main>
   </div>
+  <script src="mcq-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
