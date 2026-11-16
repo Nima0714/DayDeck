@@ -13,41 +13,27 @@
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#" aria-label="DayDeck home">
-        <span class="brand-mark">✦</span><span>DayDeck</span>
-      </a>
+      <a class="brand" href="#" aria-label="DayDeck home"><span class="brand-mark">✦</span><span>DayDeck</span></a>
       <p class="side-caption">YOUR PERSONAL SPACE</p>
       <nav class="nav" aria-label="Main navigation">
         <button class="nav-btn active" data-view="home"><span>⌂</span> Overview</button>
         <button class="nav-btn" data-view="tasks"><span>✓</span> Tasks</button>
         <button class="nav-btn" data-view="study"><span>▤</span> Study Planner</button>
+        <button class="nav-btn" data-view="monthly"><span>▦</span> Monthly Tracker</button>
+        <button class="nav-btn" data-view="tomorrow"><span>☀</span> Tomorrow</button>
+        <button class="nav-btn" data-view="quiz"><span>?</span> MCQ Quiz</button>
         <button class="nav-btn" data-view="focus"><span>◷</span> Focus Timer</button>
         <button class="nav-btn" data-view="notes"><span>✎</span> Notes</button>
       </nav>
-      <div class="sidebar-bottom">
-        <div class="offline-pill"><i></i> Works offline</div>
-        <p>Small steps. Every day.</p>
-      </div>
+      <div class="sidebar-bottom"><div class="offline-pill"><i></i> Works offline</div><p>Small steps. Every day.</p></div>
     </aside>
-
     <main class="main">
       <header class="topbar">
-        <div>
-          <p class="eyebrow" id="todayLabel">YOUR SPACE</p>
-          <h1 id="pageTitle">Good day <span>✦</span></h1>
-        </div>
+        <div><p class="eyebrow" id="todayLabel">YOUR SPACE</p><h1 id="pageTitle">Good day <span>✦</span></h1></div>
         <button class="avatar" id="installBtn" title="Install DayDeck" hidden>↓</button>
       </header>
-
       <section class="view active" id="view-home">
-        <div class="welcome-card">
-          <div>
-            <p class="eyebrow mint">A FRESH START</p>
-            <h2>ඔයාගේ දවස,<br>ඔයාගේ දිශාව.</h2>
-            <p class="muted">අද කරන්න ඕන දේවල් ටිකෙන් ටික සම්පූර්ණ කරමු.</p>
-          </div>
-          <div class="welcome-orb">✦</div>
-        </div>
+        <div class="welcome-card"><div><p class="eyebrow mint">A FRESH START</p><h2>ඔයාගේ දවස,<br>ඔයාගේ දිශාව.</h2><p class="muted">අද කරන්න ඕන දේවල් ටිකෙන් ටික සම්පූර්ණ කරමු.</p></div><div class="welcome-orb">✦</div></div>
         <div class="stats-grid">
           <article class="stat-card"><span class="stat-icon">✓</span><p>Tasks done</p><strong id="doneCount">0</strong></article>
           <article class="stat-card"><span class="stat-icon">◷</span><p>Tasks left</p><strong id="leftCount">0</strong></article>
@@ -62,30 +48,35 @@
           <button class="quick-card" data-go="notes"><span>✎</span><b>Quick Notes</b><small>Save your thoughts</small></button>
         </div>
       </section>
-
       <section class="view" id="view-tasks">
         <div class="section-heading"><div><p class="eyebrow">GET IT DONE</p><h2>Tasks</h2><p class="muted">වැඩ එකින් එක සම්පූර්ණ කරන්න.</p></div></div>
         <form class="add-form" id="taskForm"><input id="taskInput" maxlength="100" placeholder="අද කරන්න ඕන දෙයක්..." required><button class="primary-btn">Add task</button></form>
         <div class="panel"><div class="panel-head"><b>Your list</b><span id="taskSummary" class="muted small">0 tasks</span></div><div id="taskList" class="item-list"><div class="empty-state">ඔයාගේ පළමු task එක එකතු කරන්න.</div></div></div>
       </section>
-
       <section class="view" id="view-study">
         <div class="section-heading"><div><p class="eyebrow">LEARN WITH A PLAN</p><h2>Study Planner</h2><p class="muted">ඔයා ඉගෙනගන්න විෂයන් මෙතැනට එකතු කරන්න.</p></div></div>
         <form class="add-form" id="subjectForm"><input id="subjectInput" maxlength="50" placeholder="විෂය නම (උදා: ICT)" required><button class="primary-btn">Add subject</button></form>
         <div id="subjectList" class="subject-grid"><div class="empty-state wide">තවම විෂයන් එකතු කරලා නැහැ.</div></div>
       </section>
-
+      <section class="view" id="view-monthly">
+        <div class="section-heading"><div><p class="eyebrow">YOUR CONSISTENCY</p><h2>Monthly Tracker</h2><p class="muted">දවසින් දවස ඔයාගේ progress එක බලන්න.</p></div></div>
+        <div class="panel tracker-panel"><div class="calendar-head"><button class="secondary-btn" id="monthPrev" aria-label="Previous month">‹</button><h3 id="monthLabel"></h3><button class="secondary-btn" id="monthNext" aria-label="Next month">›</button></div><div class="calendar-grid calendar-week"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calendar-grid" id="calendarDays"></div><div class="calendar-legend"><span><i class="legend-dot done-dot"></i> All tasks done</span><span><i class="legend-dot some-dot"></i> Some completed</span><span><i class="legend-dot"></i> No tasks</span></div></div>
+        <div class="stats-grid tracker-stats"><article class="stat-card"><p>Selected day</p><strong id="selectedDayCount">0/0</strong></article><article class="stat-card"><p>Monthly completed</p><strong id="monthDoneCount">0</strong></article><article class="stat-card"><p>Monthly tasks</p><strong id="monthTaskCount">0</strong></article></div>
+        <div class="panel"><div class="panel-head"><b id="selectedDateTitle">Selected day</b><span class="muted small" id="selectedDateProgress">0% complete</span></div><div id="selectedDayTasks" class="item-list"><div class="empty-state">මෙම දවසට tasks නැහැ.</div></div></div>
+      </section>
+      <section class="view" id="view-tomorrow">
+        <div class="section-heading"><div><p class="eyebrow">GET READY EARLY</p><h2>Tomorrow Planner</h2><p class="muted" id="tomorrowDateLabel">හෙට දවසට කළ යුතු දේවල් සූදානම් කරගන්න.</p></div></div>
+        <form class="add-form" id="tomorrowForm"><input id="tomorrowInput" maxlength="100" placeholder="හෙට කරන්න ඕන දෙයක්..." required><button class="primary-btn">Add plan</button></form>
+        <div class="panel"><div class="panel-head"><b>Tomorrow's plan</b><span class="muted small" id="tomorrowSummary">0 tasks</span></div><div id="tomorrowList" class="item-list"><div class="empty-state">හෙටට plans තවම නැහැ.</div></div></div>
+      </section>
+      <section class="view" id="view-quiz">
+        <div class="section-heading"><div><p class="eyebrow">PRACTICE & IMPROVE</p><h2>MCQ Quiz</h2><p class="muted">A/L Technology විෂයන් සඳහා පුහුණු වෙන්න.</p></div></div>
+        <div class="panel quiz-panel"><label for="quizSubject">විෂය තෝරන්න</label><select id="quizSubject"><option value="SFT">SFT</option><option value="ET">ET</option><option value="ICT">ICT</option></select><div id="quizArea"><p class="muted">SFT පුහුණු ප්‍රශ්න තෝරලා පටන් ගන්න.</p><button class="primary-btn" id="startQuiz">Start SFT Quiz</button></div></div>
+      </section>
       <section class="view" id="view-focus">
         <div class="section-heading"><div><p class="eyebrow">ONE THING AT A TIME</p><h2>Focus Timer</h2><p class="muted">කෙටි විවේකත් එක්ක අවධානයෙන් වැඩ කරන්න.</p></div></div>
-        <div class="timer-card">
-          <p class="eyebrow mint" id="timerMode">FOCUS SESSION</p>
-          <div class="timer-ring"><div><strong id="timerDisplay">25:00</strong><span id="timerCaption">Minutes of focus</span></div></div>
-          <div class="timer-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="15">15 min</button><button class="preset" data-minutes="5">5 min break</button></div>
-          <div class="timer-actions"><button class="primary-btn" id="timerStart">Start</button><button class="secondary-btn" id="timerReset">Reset</button></div>
-          <p class="muted small" id="timerMessage">Ready when you are.</p>
-        </div>
+        <div class="timer-card"><p class="eyebrow mint" id="timerMode">FOCUS SESSION</p><div class="timer-ring"><div><strong id="timerDisplay">25:00</strong><span id="timerCaption">Minutes of focus</span></div></div><div class="timer-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="15">15 min</button><button class="preset" data-minutes="5">5 min break</button></div><div class="timer-actions"><button class="primary-btn" id="timerStart">Start</button><button class="secondary-btn" id="timerReset">Reset</button></div><p class="muted small" id="timerMessage">Ready when you are.</p></div>
       </section>
-
       <section class="view" id="view-notes">
         <div class="section-heading"><div><p class="eyebrow">SAVE YOUR THOUGHTS</p><h2>Quick Notes</h2><p class="muted">වැදගත් දේවල් අමතක නොවෙන්න ලියාගන්න.</p></div></div>
         <form class="note-form" id="noteForm"><input id="noteTitle" maxlength="70" placeholder="Note title" required><textarea id="noteBody" rows="5" maxlength="2000" placeholder="මෙතැන සටහන ලියන්න..." required></textarea><button class="primary-btn">Save note</button></form>
