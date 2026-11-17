@@ -13,7 +13,7 @@ function showView(name) {
   $("#pageTitle").innerHTML = `${titles[name] || "DayDeck"} <span>✦</span>`;
   window.scrollTo({top:0,behavior:"smooth"});
 }
-$(".nav-btn").forEach(b => b.addEventListener("click", () => showView(b.dataset.view)));
+document.querySelectorAll(".nav-btn").forEach(b => b.addEventListener("click", () => showView(b.dataset.view)));
 $$("[data-go]").forEach(b => b.addEventListener("click", () => showView(b.dataset.go)));
 
 function renderTasks() {
