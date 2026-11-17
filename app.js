@@ -8,7 +8,7 @@ let tasks = store.get("tasks", []);
 
 function showView(name) {
   $$(".view").forEach(v => v.classList.toggle("active", v.id === "view-" + name));
-  $(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.view === name));
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.dataset.view === name));
   const titles = {home:"Good day",tasks:"Your tasks",monthly:"Monthly Tracker",tomorrow:"Tomorrow Planner",quiz:"MCQ Quiz",focus:"Focus Timer"};
   $("#pageTitle").innerHTML = `${titles[name] || "DayDeck"} <span>✦</span>`;
   window.scrollTo({top:0,behavior:"smooth"});
