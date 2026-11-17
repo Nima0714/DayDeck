@@ -8,38 +8,41 @@
   <title>DayDeck</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css?v=5.0">
+  <link rel="stylesheet" href="style.css?v=5.1">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar">
-      <a class="brand" href="#" aria-label="DayDeck home"><span class="brand-mark">✦</span><span>DayDeck</span></a>
-      <p class="side-caption">YOUR PERSONAL SPACE</p>
-      <div class="current-page"><span>⌂</span> Overview</div>
+      <a class="brand" href="#" data-home aria-label="DayDeck home"><span class="brand-mark">✦</span><span>DayDeck</span></a>
+      <p class="side-caption">YOUR LEARNING SPACE</p>
+      <div class="current-page"><span>⌂</span><span id="sidePage">Overview</span></div>
       <div class="sidebar-bottom"><div class="offline-pill"><i></i> Works offline</div><p>Small steps. Every day.</p></div>
     </aside>
     <main class="main">
       <header class="topbar">
-        <div><p class="eyebrow" id="todayLabel">YOUR SPACE</p><h1>Good day <span>✦</span></h1></div>
+        <div><p class="eyebrow" id="todayLabel">YOUR SPACE</p><h1 id="pageTitle">Good day <span>✦</span></h1></div>
         <button class="avatar" id="installBtn" title="Install DayDeck" aria-label="Install DayDeck" hidden>↓</button>
       </header>
-      <section class="overview">
-        <div class="welcome-card">
+      <div id="appView" aria-live="polite">
+        <section class="welcome-card">
           <div>
             <p class="eyebrow mint">A FRESH START</p>
             <h2>MAKE EVERY<br>DAY COUNT.</h2>
             <p class="muted">අද දවස අලුත් ආරම්භයක්. ඔයාගේ ගමන සන්සුන්ව, ඔයාගේම වේගයෙන් ඉදිරියට ගෙනියන්න.</p>
           </div>
           <div class="welcome-orb">✦</div>
-        </div>
-        <div class="daily-note">
-          <span class="note-mark">✦</span>
-          <div><p class="eyebrow">A LITTLE REMINDER</p><h2>Small steps. Big progress.</h2><p class="muted">හැමදේම එක දවසින් කරන්න ඕන නැහැ. අද පුළුවන් එක හොඳ දෙයකින් පටන් ගන්න.</p></div>
-        </div>
-      </section>
+        </section>
+        <section class="selection-section">
+          <div class="section-heading"><p class="eyebrow">CHOOSE YOUR PATH</p><h2>ඔයා ඉගෙන ගන්නේ කුමන විෂය ධාරාවද?</h2></div>
+          <div class="choice-grid">
+            <button class="choice-card ol-card" data-level="ol"><span class="choice-icon">O/L</span><span class="choice-copy"><strong>සාමාන්‍ය පෙළ</strong><small>O/L SECTION</small></span><span class="choice-arrow">→</span></button>
+            <button class="choice-card al-card" data-level="al"><span class="choice-icon">A/L</span><span class="choice-copy"><strong>උසස් පෙළ</strong><small>A/L SECTION</small></span><span class="choice-arrow">→</span></button>
+          </div>
+        </section>
+      </div>
       <footer>DayDeck <span>✦</span> Made for your everyday.</footer>
     </main>
   </div>
-  <script src="app.js?v=5.0"></script>
+  <script src="app.js?v=5.1"></script>
 </body>
 </html>
