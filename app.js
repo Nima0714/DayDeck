@@ -69,6 +69,27 @@ function showResources(subject) {
     </div>`;
 }
 
+function showMathPastPapers() {
+  const paperUrl = "./2026_OL_Maths_Anumana_Prashna_Pathraya.pdf";
+  setHeader("Past Papers", "O/L / ගණිතය");
+  appView.innerHTML = `
+    <button class="back-button" data-back="resources">← ගණිතය වෙත</button>
+    <section class="section-heading page-heading">
+      <p class="eyebrow">O/L • ගණිතය</p>
+      <h2>Past Papers</h2>
+      <p class="muted">ප්‍රශ්න පත්‍ර තෝරන්න.</p>
+    </section>
+    <div class="resource-grid">
+      <article class="resource-card">
+        <span class="resource-icon">▧</span>
+        <strong>2026 අනුමාන ප්‍රශ්න පත්‍රය</strong>
+        <small>පිටු 6 • PDF</small>
+        <a class="primary-button" href="${paperUrl}" target="_blank" rel="noopener">Open Paper →</a>
+        <a class="back-button" href="${paperUrl}" download="2026-OL-Maths-Anumana.pdf">Download PDF ↓</a>
+      </article>
+    </div>`;
+}
+
 function showResourcePlaceholder(resource) {
   setHeader(resource, currentSubject);
   appView.innerHTML = `
@@ -184,6 +205,7 @@ appView.addEventListener("click", (event) => {
   }
   if (resourceButton) {
     if (resourceButton.dataset.resource === "Quiz" && currentLevel === "al" && currentSubject === "ICT") showQuizSetup();
+    else if (resourceButton.dataset.resource === "Past Papers" && currentLevel === "ol" && currentSubject === "ගණිතය") showMathPastPapers();
     else showResourcePlaceholder(resourceButton.dataset.resource);
   }
   const startButton = event.target.closest("[data-start-quiz]");
