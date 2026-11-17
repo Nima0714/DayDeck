@@ -81,6 +81,96 @@ function showResourcePlaceholder(resource) {
     </section>`;
 }
 
+let activeQuiz = [];
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function showQuizSetup() {
+  const bank = window.DAYDECK_QUIZ_BANKS?.[currentLevel]?.[currentSubject] || [];
+  setHeader("Quiz", currentSubject);
+  appView.innerHTML = `
+    <button class="back-button" data-back="resources">← ${currentSubject} වෙත</button>
+    <section class="quiz-intro">
+      <p class="eyebrow">${currentLevel.toUpperCase()} • ${currentSubject} QUIZ</p>
+      <h2>${currentSubject} ප්‍රශ්නාවලිය</h2>
+      <p class="muted">ප්‍රශ්න බැංකුවේ ප්‍රශ්න ${bank.length}ක් ඇත. අහඹු ප්‍රශ්න 10ක් තෝරාගෙන පිළිතුරු සපයන්න.</p>
+      <button class="primary-button" data-start-quiz ${bank.length < 10 ? "disabled" : ""}>Start ${currentSubject} Quiz →</button>
+      ${bank.length < 10 ? '<p class="quiz-error">මෙම විෂයට ප්‍රමාණවත් ප්‍රශ්න තවම ඇතුළත් කර නැහැ.</p>' : ""}
+    </section>`;
+}
+
+function startQuiz() {
+  const bank = window.DAYDECK_QUIZ_BANKS?.[currentLevel]?.[currentSubject] || [];
+  if (bank.length < 10) {
+    showQuizSetup();
+    return;
+  }
+  activeQuiz = [...bank].sort(() => Math.random() - 0.5).slice(0, 10);
+  quizIndex = 0;
+  quizScore = 0;
+  quizAnswered = false;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  const item = activeQuiz[quizIndex];
+  if (!item) return showQuizResult();
+  quizAnswered = false;
+  setHeader("Quiz", currentSubject);
+  appView.innerHTML = `
+    <button class="back-button" data-back="resources">← ${currentSubject} වෙත</button>
+    <div class="quiz-meta"><span>QUESTION ${quizIndex + 1} / 10</span><span>ලකුණු: ${quizScore}</span></div>
+    <div class="quiz-progress"><span style="width:${(quizIndex / 10) * 100}%"></span></div>
+    <section class="quiz-question-card">
+      <p class="eyebrow">ප්‍රශ්නය ${String(item.id).padStart(2, "0")}</p>
+      <h2>${item.question}</h2>
+      <div class="quiz-options">
+        ${Object.entries(item.options).map(([key, value]) => `
+          <button class="quiz-option" data-answer="${key}">
+            <span class="option-letter">${key}</span><span>${value}</span>
+          </button>`).join("")}
+      </div>
+      <div id="answerFeedback" aria-live="polite"></div>
+    </section>`;
+}
+
+function chooseQuizAnswer(answer) {
+  if (quizAnswered) return;
+  const item = activeQuiz[quizIndex];
+  if (!item) return;
+  quizAnswered = true;
+  const correct = answer === item.answer;
+  if (correct) quizScore++;
+  document.querySelectorAll(".quiz-option").forEach(button => {
+    button.disabled = true;
+    const key = button.dataset.answer;
+    if (key === item.answer) button.classList.add("correct");
+    else if (key === answer) button.classList.add("incorrect");
+  });
+  const feedback = document.querySelector("#answerFeedback");
+  if (feedback) feedback.innerHTML = `
+    <div class="answer-feedback ${correct ? "is-correct" : "is-incorrect"}">
+      <strong>${correct ? "නිවැරදියි! ✓" : "වැරදියි. නිවැරදි පිළිතුර: " + item.answer}</strong>
+      <p>${item.explanation}</p>
+    </div>
+    <button class="primary-button next-question" data-next-question>${quizIndex === 9 ? "ප්‍රතිඵල බලන්න" : "ඊළඟ ප්‍රශ්නය"} →</button>`;
+}
+
+function showQuizResult() {
+  setHeader("Quiz Result", currentSubject);
+  const percent = quizScore * 10;
+  appView.innerHTML = `
+    <section class="quiz-result">
+      <p class="eyebrow">QUIZ COMPLETED</p>
+      <h2>ඔයාගේ ප්‍රතිඵලය</h2>
+      <div class="score-circle"><strong>${quizScore}/10</strong><span>${percent}%</span></div>
+      <p class="muted">${quizScore >= 8 ? "ඉතා හොඳයි! මේ විදිහටම ඉදිරියට යන්න." : quizScore >= 5 ? "හොඳ උත්සාහයක්! තව ටිකක් පුහුණු වෙමු." : "නැවත Notes කියවා උත්සාහ කරමු."}</p>
+      <button class="primary-button" data-retry-quiz>නැවත Quiz එකක් කරන්න ↻</button>
+      <button class="back-button result-back" data-back="resources">විෂයට ආපසු</button>
+    </section>`;
+}
+
 appView.addEventListener("click", (event) => {
   const levelButton = event.target.closest("[data-level]");
   const subjectButton = event.target.closest("[data-subject]");
@@ -92,7 +182,18 @@ appView.addEventListener("click", (event) => {
     const subject = subjects[currentLevel].items[Number(subjectButton.dataset.subject)];
     if (subject) showResources(subject);
   }
-  if (resourceButton) showResourcePlaceholder(resourceButton.dataset.resource);
+  if (resourceButton) {
+    if (resourceButton.dataset.resource === "Quiz" && currentLevel === "al" && currentSubject === "ICT") showQuizSetup();
+    else showResourcePlaceholder(resourceButton.dataset.resource);
+  }
+  const startButton = event.target.closest("[data-start-quiz]");
+  const answerButton = event.target.closest("[data-answer]");
+  const nextButton = event.target.closest("[data-next-question]");
+  const retryButton = event.target.closest("[data-retry-quiz]");
+  if (startButton) startQuiz();
+  if (answerButton) chooseQuizAnswer(answerButton.dataset.answer);
+  if (nextButton) { quizIndex++; renderQuizQuestion(); }
+  if (retryButton) startQuiz();
   if (backButton) {
     if (backButton.dataset.back === "home") showOverview();
     if (backButton.dataset.back === "subjects" && currentLevel) showSubjects(currentLevel);
