@@ -1,5 +1,5 @@
-const CACHE = "daydeck-v5.2";
-const FILES = ["./", "./index.html", "./style.css?v=5.2", "./app.js?v=5.2", "./manifest.json", "./icon.svg", "./ict-quiz.js?v=5.2"];
+const CACHE = "daydeck-v5.3";
+const FILES = ["./", "./index.html", "./style.css?v=5.2", "./app.js?v=5.3", "./manifest.json", "./icon.svg", "./ict-quiz.js?v=5.2", "./2026_OL_Maths_Anumana_Prashna_Pathraya.pdf"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));
